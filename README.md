@@ -1,6 +1,6 @@
 # apache-spark
 
-### Spark Pivot (Row data) pySpark & Scala
+### Spark Pivot (Row data) Python & Scala
 
 ```
 >>> df.show()
