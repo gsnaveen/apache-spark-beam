@@ -1,6 +1,6 @@
 # apache-spark
 
-### Spark Pivot
+### Spark Pivot (Row data)
 
 ```
 >>> df.show()
@@ -13,7 +13,7 @@
 +----------+-------+------+
 ```
 
-#### Spark Pivoted
+#### Spark Pivoted data
 ```
 >>> dfPivot.show()
 +-------+------+------+------+
