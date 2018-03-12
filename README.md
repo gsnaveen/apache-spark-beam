@@ -1,6 +1,6 @@
 # apache-spark
 
-### Spark Pivot using PySpark
+### Spark Pivot
 
 ```
 >>> df.show()
