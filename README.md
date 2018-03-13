@@ -1,6 +1,6 @@
 # apache-spark
 
-### Spark Pivot (Row data) Python & Scala
+### Spark Pivot (Rolling Weeks) Python & Scala
 
 ```
 >>> df.show()
