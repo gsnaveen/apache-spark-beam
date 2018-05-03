@@ -14,7 +14,7 @@ mylist = [row[0] for row in dffilter.select("userid").collect()]
 def filterUser(value,list1=mylist ):
 		return True if value in list1 else False
 #--Regestring UDF 	
-udffilterUser = f.udf(filterUser, StringType
+udffilterUser = f.udf(filterUser, StringType())
 #--Applying the filter function
 df = df.withColumn("filters", udffilterUser("userid"))
 
