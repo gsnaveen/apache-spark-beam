@@ -1,3 +1,5 @@
+# Setting up a filter flag in dataFrame for values in a list
+
 from pyspark.sql.types import *
 from pyspark.sql import functions as f
 
