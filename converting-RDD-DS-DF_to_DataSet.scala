@@ -9,9 +9,7 @@ def myparser(x:String) : Option[dfSchema] = {
   }
 
 val df = myRDD.flatMap(myparser).toDF()
-
-//Reading as DataSet and converting it to a dataframe
-
+//Reading as DataSet and converting it to a structured dataset
 // as[String is critical to have this as a data set]  
 var myDS = spark.read.text("/nav_sp1/*").as[String]
 //myDS: org.apache.spark.sql.Dataset[String] = [value: string]
