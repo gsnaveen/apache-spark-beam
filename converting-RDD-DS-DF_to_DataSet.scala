@@ -16,6 +16,7 @@ val df = myRDD.flatMap(myparser).toDF()
 var myDS = spark.read.text("/nav_sp1/*").as[String]
 //myDS: org.apache.spark.sql.Dataset[String] = [value: string]
 val df = myDS.flatMap(myparser)
+//res0: org.apache.spark.sql.Dataset[dfSchema] = [cookie: string, url: string ... 1 more field]
 
 //import as DataFrame myparser(x:Row)  x has to be rowType
 var myDF = spark.read.text("/nav_sp1/*")
