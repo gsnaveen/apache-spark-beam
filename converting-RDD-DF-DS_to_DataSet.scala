@@ -1,4 +1,4 @@
-//DataSets is the new thing which has performance benifets over RDD & DataFrames
+//DataSets performs better than RDD & DataFrames in most of the scenarios
 case class dfSchema(cookie:String,url:String,campaign:String)
 
 //Reading as RDD and converting it to a dataframe
