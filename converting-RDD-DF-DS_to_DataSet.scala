@@ -24,5 +24,5 @@ def myparser(x:Row) : Option[dfSchema] = {
     val mypattern = x.toString().split('\t');
     return Some(dfSchema(mypattern(0),mypattern(1),mypattern(2)))
  }
- 
+//the following autometically converts the DataFrame to DataSet 
 val df = myDF.flatMap(myparser)
