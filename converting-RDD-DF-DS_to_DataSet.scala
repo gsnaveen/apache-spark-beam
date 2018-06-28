@@ -27,3 +27,4 @@ def myparser(x:Row) : Option[dfSchema] = {
  }
 //the following autometically converts the DataFrame to DataSet 
 val df = myDF.flatMap(myparser)
+//df: org.apache.spark.sql.Dataset[dfSchema] = [cookie: string, url: string ... 1 more field]
