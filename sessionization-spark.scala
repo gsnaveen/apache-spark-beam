@@ -7,7 +7,7 @@ object session1 {
   case class SessionData(userid:String,t1:String,sessionid:String)
 
   def main(args: Array[String]) {
-    var spark = SparkSession.builder.appName("SessionID-Scala").master("local").getOrCreate(); //.enableHiveSupport()
+    var spark = SparkSession.builder.appName("Session1-Scala").master("local").getOrCreate(); //.enableHiveSupport()
 
     var records = Seq(sourceData("userid1",10),sourceData("userid1",25),sourceData("userid1",30),sourceData("userid1",65),sourceData("userid1",80),sourceData("userid1",88))
     var df = spark.createDataFrame(records)
@@ -26,9 +26,8 @@ object session1 {
 
     var dfworkArray = dfwork.collect()
 
-    var mydataall = spark.createDataFrame(Seq(SessionData(dfworkArray(0)(0).toString,dfworkArray(0)(1).toString,dfworkArray(0)(2).toString)))
     var SessionID = dfworkArray(0)(2).toString
-
+    var mydataall = spark.createDataFrame(Seq(SessionData(dfworkArray(0)(0).toString,dfworkArray(0)(1).toString,SessionID)))
 
     for (i <- 1 to dfworkArray.size -1 ) {
 
