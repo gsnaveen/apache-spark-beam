@@ -1,4 +1,4 @@
-df = spark.sql("""select 
+var df = spark.sql("""select 
 		column1,
 		column2,
 		column3
