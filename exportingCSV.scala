@@ -2,7 +2,7 @@ var df = spark.sql("""select
 		column1,
 		column2,
 		column3
-		from db.bmytable
+		from db.mytable
 		where create_date = '2018-06-24'""")
 		
 df.coalesce(5).write.csv("/app/db/folder")		# will create only 5 files which may not be equal in size.
