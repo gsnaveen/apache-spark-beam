@@ -1,5 +1,4 @@
 //Group by Multiple columns, Alias and creating multiple metrics
-
 df.groupBy(col("viewdate").alias("dim1"),col("country_code")).agg(min("viewdate").alias("Min"),max("viewdate").alias("Max")).show()
 
 //Supported join types include: 'inner', 'outer', 'full', 'fullouter', 'full_outer', 'leftouter', 'left'
@@ -21,5 +20,6 @@ val acceptDecline = spark.table("MyTable")
       .withColumn("accpDecline", when($"action" === "accept", 1).otherwise( when($"action" === "decline", 0).otherwise(-1)))
       .filter($"accpDecline" === 0 || $"accpDecline" === 1)
 
+//Windowing functions
 import org.apache.spark.sql.expressions.Window
 df1.withColumn("rank", rank().over(Window.partitionBy(col("viewdate")).orderBy(col("ip").asc))).show()
