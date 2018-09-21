@@ -15,7 +15,7 @@ val acceptDecline = spark.table("MyTable")
       .select(
         $"date" cast "date" as "viewdate"
       , $"user" as "userid"
-      , $"params"("linktext") as "action"
+      , $"params"("event") as "action"
       )
       .withColumn("accpDecline", when($"action" === "accept", 1).otherwise( when($"action" === "decline", 0).otherwise(-1)))
       .filter($"accpDecline" === 0 || $"accpDecline" === 1)
