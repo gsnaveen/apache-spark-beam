@@ -5,3 +5,13 @@ df.groupBy(col("viewdate").alias("dim1"),col("country_code")).agg(min("viewdate"
 //Supported join types include: 'inner', 'outer', 'full', 'fullouter', 'full_outer', 'leftouter', 'left', 'left_outer', 'rightouter', 'right', 'right_outer', 'leftsemi', 'left_semi', 'leftanti', 'left_anti', 'cross'
 val df3 = df1.join(df2, df1.col("viewdate") === df2.col("viewdate") && df1.col("ip") ===df2.col("ip"),"inner").select(df1.col("ip").alias("df1IP"),df2.col("ip").alias("df2IP"),df1.col("viewdate"),df2.col("viewdate"))
 val df3 = df1.join(df2, df1.col("viewdate") === df2.col("viewdate") && df1.col("ip") ===df2.col("ip"),"left_outer").select(df1.col("ip").alias("df1IP"),df2.col("ip").alias("df2IP"),df1.col("viewdate"),df2.col("viewdate"))
+
+
+val acceptDecline = spark.table("MyTable")
+      .select(
+        $"date" cast "date" as "viewdate"
+      , $"user" as "userid"
+      , $"params"("linktext") as "action"
+      )
+      .withColumn("accpDecline", when($"action" === "accept", 1).otherwise( when($"action" === "decline", 0).otherwise(-1)))
+      .filter($"accpDecline" === 0 || $"accpDecline" === 1)
