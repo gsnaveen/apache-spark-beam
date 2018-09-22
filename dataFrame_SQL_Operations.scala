@@ -23,3 +23,16 @@ val acceptDecline = spark.table("MyTable")
 //Windowing functions
 import org.apache.spark.sql.expressions.Window
 df1.withColumn("rank", rank().over(Window.partitionBy(col("viewdate")).orderBy(col("ip").asc))).show()
+
+// SQL Aggregate functions
+select RowKey
+,session_id
+,datetime
+,url
+,FIRST_VALUE(url) over( partition by session_id order by `timestamp`)  firstURL
+,LAST_VALUE(url) over( partition by session_id order by `timestamp`)  LastURL
+,rank() over( partition by session_id order by `timestamp`)  rank1
+,dense_rank() over( partition by session_id order by `timestamp`)  denserank
+,ROW_NUMBER() over( partition by session_id order by `timestamp`) rownumber
+,CUME_DIST() over( partition by session_id order by `timestamp`) cumedist
+from Webdata
