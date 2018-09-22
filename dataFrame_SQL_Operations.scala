@@ -20,6 +20,12 @@ val acceptDecline = spark.table("MyTable")
       .withColumn("accpDecline", when($"action" === "accept", 1).otherwise( when($"action" === "decline", 0).otherwise(-1)))
       .filter($"accpDecline" === 0 || $"accpDecline" === 1)
 
+// Joining using a broadcast variable
+import org.apache.spark.sql.functions.broadcast
+val df1 = spark.read.option("sep", "\t").option("header","true").csv("inData.txt")
+val df22 = spark.read.option("sep", "\t").option("header","true").csv("inData2.txt")
+val df2 = broadcast(df22)
+
 //Windowing functions
 import org.apache.spark.sql.expressions.Window
 df1.withColumn("rank", rank().over(Window.partitionBy(col("viewdate")).orderBy(col("ip").asc))).show()
