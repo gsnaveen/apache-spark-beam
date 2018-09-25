@@ -36,6 +36,10 @@ Running SUM SQL = spark.sql("Select ip,orders, sum(orders) over(partition by ip 
 Expression = dfy.withColumn("numpart",expr("substring(sounded, 2, length(sounded)-1)"))
 SelectExpression = dataset.selectExpr("min( case when weekofyear > 16 then weekofyear end )").collect()
 
+dataset = dataset.withColumn('weekofyear',f.when(dataset.weekofyear > 16,dataset.weekofyear - var[0][0] ).when(dataset.weekofyear < 17,dataset.weekofyear + 52 - var[0][0] ))
+StringAdd = 'Week_'
+dataset = dataset.withColumn("weekbucket", f.concat(f.lit(StringAdd),dataset.weekofyear.cast("string")))
+
 // SQL Aggregate functions
 select RowKey
 ,session_id
