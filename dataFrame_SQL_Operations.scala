@@ -1,6 +1,12 @@
 //Group by Multiple columns, Alias and creating multiple metrics
 df.groupBy(col("viewdate").alias("dim1"),col("country_code")).agg(min("viewdate").alias("Min"),max("viewdate").alias("Max")).show()
 
+// Joining using a broadcast variable
+import org.apache.spark.sql.functions.broadcast
+val df1 = spark.read.option("sep", "\t").option("header","true").csv("inData.txt")
+val df22 = spark.read.option("sep", "\t").option("header","true").csv("inData2.txt")
+val df2 = broadcast(df22)
+
 //Supported join types include: 'inner', 'outer', 'full', 'fullouter', 'full_outer', 'leftouter', 'left'
 //, 'left_outer', 'rightouter', 'right', 'right_outer', 'leftsemi', 'left_semi', 'leftanti', 'left_anti', 'cross'
 val df3 = df1.join(df2, df1.col("viewdate") === df2.col("viewdate") && df1.col("ip") ===df2.col("ip"),"inner")
@@ -20,11 +26,7 @@ val acceptDecline = spark.table("MyTable")
       .withColumn("accpDecline", when($"action" === "accept", 1).otherwise( when($"action" === "decline", 0).otherwise(-1)))
       .filter($"accpDecline" === 0 || $"accpDecline" === 1)
 
-// Joining using a broadcast variable
-import org.apache.spark.sql.functions.broadcast
-val df1 = spark.read.option("sep", "\t").option("header","true").csv("inData.txt")
-val df22 = spark.read.option("sep", "\t").option("header","true").csv("inData2.txt")
-val df2 = broadcast(df22)
+
 
 //Windowing functions
 import org.apache.spark.sql.expressions.Window
