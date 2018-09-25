@@ -30,6 +30,9 @@ val df2 = broadcast(df22)
 import org.apache.spark.sql.expressions.Window
 df1.withColumn("rank", rank().over(Window.partitionBy(col("viewdate")).orderBy(col("ip").asc))).show()
 
+RunningSUM = df1.withColumn("runnignsum", sum(col("orders")).over(Window.partitionBy(col("ip")).orderBy("ip").rowsBetween(Long.MinValue, 0))).show()
+Running SUM SQL = spark.sql("Select ip,orders, sum(orders) over(partition by ip order by orders rows between UNBOUNDED PRECEDING and Current row ) cumOrders from df1").show()
+
 // SQL Aggregate functions
 select RowKey
 ,session_id
