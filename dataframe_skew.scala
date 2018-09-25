@@ -12,7 +12,7 @@ val repartDF = df1.repartition($"ip",$"rownum")
 repartDF.rdd.partitions.size
 repartDF.write.csv("mypart1x")
 
-df11.withColumn("id2",monotonicallyIncreasingId)
+df11.withColumn("id",monotonicallyIncreasingId)
 	  .withColumn("id2",row_number().over(Window.orderBy(lit(1))))
 /*
 
