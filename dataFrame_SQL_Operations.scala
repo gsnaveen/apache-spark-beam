@@ -33,6 +33,9 @@ df1.withColumn("rank", rank().over(Window.partitionBy(col("viewdate")).orderBy(c
 RunningSUM = df1.withColumn("runnignsum", sum(col("orders")).over(Window.partitionBy(col("ip")).orderBy("ip").rowsBetween(Long.MinValue, 0))).show()
 Running SUM SQL = spark.sql("Select ip,orders, sum(orders) over(partition by ip order by orders rows between UNBOUNDED PRECEDING and Current row ) cumOrders from df1").show()
 
+Expression = dfy.withColumn("numpart",expr("substring(sounded, 2, length(sounded)-1)"))
+SelectExpression = dataset.selectExpr("min( case when weekofyear > 16 then weekofyear end )").collect()
+
 // SQL Aggregate functions
 select RowKey
 ,session_id
