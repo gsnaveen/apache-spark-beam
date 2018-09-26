@@ -17,6 +17,7 @@ import org.apache.beam.sdk.transforms.SimpleFunction;
 import org.apache.beam.sdk.values.KV;
 import org.apache.beam.sdk.values.PCollection;
 
+
 import com.google.api.services.bigquery.model.TableRow;
 
 public class BkDataload {
