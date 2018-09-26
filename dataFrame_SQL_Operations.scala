@@ -1,6 +1,6 @@
 //Group by Multiple columns, Alias and creating multiple metrics
 df.groupBy(col("viewdate").alias("dim1"),col("country_code")).agg(min("viewdate").alias("Min"),max("viewdate").alias("Max")).show()
-df.groupBy(col("viewdate")).count().orderBy($"count".desc).show()
+df.groupBy($"viewdate").count().orderBy($"count".desc).show()
 
 // Joining using a broadcast variable
 import org.apache.spark.sql.functions.broadcast
