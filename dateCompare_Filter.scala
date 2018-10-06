@@ -1,36 +1,32 @@
-import org.apache.spark.sql.{Row, SparkSession}
+import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 import org.joda.time.format.DateTimeFormat
 
-/* Input Data is tab seperated file
+/*
+custId	data_date	buy
+1	2018-08-01 11:00:00	10
+2	2018-08-02 11:00:00	15
+3	2018-08-03 11:00:00	20
+4	2018-08-04 11:00:00	30
+*/
 
-custId	data_date
-1	2018-08-01 11:00:00
-2	2018-08-02 11:00:00
-3	2018-08-03 11:00:00
-4	2018-08-04 11:00:00
-
- */
-
-object dtttest {
+object datetest2 {
 
   def main(args: Array[String]) {
     var spark = SparkSession.builder.appName("dateTest").master("local").getOrCreate(); //.enableHiveSupport()
 
     val innowDate: String = "2018-08-04"
     val formatter = DateTimeFormat.forPattern("yyyy-MM-dd")
-    val gtDate = formatter.parseDateTime(innowDate).minusDays(2).toString("yyy-MM-dd")
+    val gtDate = formatter.parseDateTime(innowDate).minusDays(2).toString("yyy-MM-dd") //56 days for our scenario
 
     val df = spark.read.option("header","true").option("sep","\t").csv("inData.tsv")
-    val df2 = df.withColumn("data_date_dtype", col("data_date").cast("date").cast("String"))
-    val df3 = df2.filter(col("data_date_dtype").gt(gtDate))
-//    val df3 = df2.filter(col("data_date_dtype") > gtDate)
+    val dfAns = df.filter(col("data_date").cast("date").cast("String").gt(gtDate)).groupBy("custid").agg(sum(col("buy")).alias("total"),(sum(col("buy"))/8).alias("avg"))
 
-
-    df3.show()
-    println(df3.printSchema())
+    dfAns.show()
+    println(dfAns.printSchema())
+    dfAns.coalesce(1).write.mode("overwrite").option("header","true").csv("myoutput.csv")
     spark.stop()
   }
 
-
 }
+
