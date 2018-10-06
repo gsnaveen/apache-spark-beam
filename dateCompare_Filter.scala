@@ -19,12 +19,12 @@ object dtttest {
 
     val innowDate: String = "2018-08-04"
     val formatter = DateTimeFormat.forPattern("yyyy-MM-dd")
-    val nowDate = formatter.parseDateTime(innowDate).minusDays(2).toString("yyy-MM-dd")
+    val gtDate = formatter.parseDateTime(innowDate).minusDays(2).toString("yyy-MM-dd")
 
     val df = spark.read.option("header","true").option("sep","\t").csv("inData.tsv")
     val df2 = df.withColumn("data_date_dtype", col("data_date").cast("date").cast("String"))
-    val df3 = df2.filter(col("data_date_dtype").gt(nowDate))
-//    val df3 = df2.filter(col("data_date_dtype") > nowDate)
+    val df3 = df2.filter(col("data_date_dtype").gt(gtDate))
+//    val df3 = df2.filter(col("data_date_dtype") > gtDate)
 
 
     df3.show()
