@@ -21,7 +21,7 @@ object datetest4 {
     val lookBackWindow : Int = 2
     val lookBackWindowWeeks: Int = 8
     val formatter = DateTimeFormat.forPattern("yyyy-MM-dd")
-    val getDateTime = formatter.parseDateTime(innowDate).minusDays(lookBackWindow).toString("yyyy-MM-dd")  //Computing based on the look back in term of days
+    val gtDate = formatter.parseDateTime(innowDate).minusDays(lookBackWindow).toString("yyyy-MM-dd")  //Computing based on the look back in term of days
     val getDatesforWeekStart = formatter.parseDateTime(innowDate).minusWeeks(lookBackWindowWeeks) //Computing based on the look back window in weeks
 
     def dateFilter(getDateTime: String)(tDate: String): Boolean = {
@@ -36,7 +36,7 @@ object datetest4 {
       }
     }
     //Currying
-    val dfDateFilter = dateFilter(getDateTime) _
+    val dfDateFilter = dateFilter(gtDate) _
     val dfDateFilterCall = udf[Boolean,String](dfDateFilter)
 
 
