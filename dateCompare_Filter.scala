@@ -21,7 +21,7 @@ object datetest2 {
     val lookBackWindowWeeks: Int = 8
     val formatter = DateTimeFormat.forPattern("yyyy-MM-dd")
     val gtDate = formatter.parseDateTime(innowDate).minusDays(lookBackWindow).toString("yyy-MM-dd") //56 days for the customer scenario
-    val getDateTime = formatter.parseDateTime(innowDate).minusDays(lookBackWindow) //Computing based on the look back in term of days
+    //val getDateTime = formatter.parseDateTime(innowDate).minusDays(lookBackWindow) //Computing based on the look back in term of days
     val getDatesforWeekStart = formatter.parseDateTime(innowDate).minusWeeks(lookBackWindowWeeks) //Computing based on the look back window in weeks
 
     //Reading the data from a text file
