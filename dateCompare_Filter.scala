@@ -1,5 +1,3 @@
-package com.ganaveen
-
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 import org.joda.time.format.DateTimeFormat
@@ -19,19 +17,29 @@ object datetest2 {
 
     //Input date for computing the 8 weeks date range
     val innowDate: String = "2018-08-04"
+    val lookBackWindow : Int = 2
     val formatter = DateTimeFormat.forPattern("yyyy-MM-dd")
-    val gtDate = formatter.parseDateTime(innowDate).minusDays(2).toString("yyy-MM-dd") //56 days for the customer scenario
+    val gtDate = formatter.parseDateTime(innowDate).minusDays(lookBackWindow).toString("yyy-MM-dd") //56 days for the customer scenario
+    val getDateTime = formatter.parseDateTime(innowDate).minusDays(lookBackWindow)
 
     //Reading the data from a text file
     val df = spark.read.option("header","true").option("sep","\t").csv("inData.tsv")
     val dfAns = df.filter(col("data_date").gt(gtDate)).groupBy("custid").agg(sum(col("buy")).alias("total"),(sum(col("buy"))/8).alias("avg")) //takes into consideration the time component of the date as well
-    val dfAns2 = df.filter(col("data_date").cast("dte").cast("String").gt(gtDate)).groupBy("custid").agg(sum(col("buy")).alias("total"),(sum(col("buy"))/8).alias("avg")) // this takes only the date into consideration
+    val dfAns2 = df.filter(col("data_date").cast("date").cast("String").gt(gtDate)).groupBy("custid").agg(sum(col("buy")).alias("total"),(sum(col("buy"))/8).alias("avg")) // this takes only the date into consideration
+
+    //Converting timestamp and input value to double and the applying less than condition.
+    val dfAns3 = df.filter(((lit(innowDate).cast("timestamp").cast("double") - col("data_date").cast("timestamp").cast("double") )/(24D *3600D)).lt(lookBackWindow)).groupBy("custid").agg(sum(col("buy")).alias("total"),(sum(col("buy"))/8).alias("avg"))
+
+
 
     println("Date only grater than")
     dfAns.show()
 
     println("Date time grater than")
     dfAns2.show()
+
+    println("conveerted to double for compare")
+    dfAns3.show()
 
     //Printing Schema
     println(dfAns.printSchema())
@@ -41,4 +49,3 @@ object datetest2 {
   }
 
 }
-
