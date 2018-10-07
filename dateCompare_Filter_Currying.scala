@@ -30,6 +30,7 @@ object datetest4 {
       val myDuration: Duration = new Duration(formatter.parseDateTime(getDateTime), formatterdt.parseDateTime(tDate))
 
       myDuration.getStandardDays() match {
+          // for filtering false gets filtered out
         case x if x > 0 => true
         case _ => false
       }
@@ -41,7 +42,7 @@ object datetest4 {
 
     //Reading the data from a text file
     val df = spark.read.option("header","true").option("sep","\t").csv("inData.tsv")
-    val dfAns = df.filter(dfDateFilterCall(col("data_date")))
+    val dfAns = df.filter(dfDateFilterCall(col("data_date"))).groupBy("custid").agg(sum(col("buy")).alias("total"),(sum(col("buy"))/8).alias("avg"))
     dfAns.show()
 
     //Printing Schema
