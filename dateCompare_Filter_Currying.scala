@@ -1,4 +1,3 @@
-
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 import org.joda.time.format.DateTimeFormat
@@ -20,9 +19,10 @@ object datetest4 {
     //Input date for computing the 8 weeks date range
     val innowDate: String = "2018-08-04"
     val lookBackWindow : Int = 2
+    val lookBackWindowWeeks: Int = 8
     val formatter = DateTimeFormat.forPattern("yyyy-MM-dd")
-    val getDateTime = formatter.parseDateTime(innowDate).minusDays(lookBackWindow).toString("yyyy-MM-dd")
-
+    val getDateTime = formatter.parseDateTime(innowDate).minusDays(lookBackWindow).toString("yyyy-MM-dd")  //Computing based on the look back in term of days
+    val getDatesforWeekStart = formatter.parseDateTime(innowDate).minusWeeks(lookBackWindowWeeks) //Computing based on the look back window in weeks
 
     def dateFilter(getDateTime: String)(tDate: String): Boolean = {
       val formatter = DateTimeFormat.forPattern("yyyy-MM-dd")
