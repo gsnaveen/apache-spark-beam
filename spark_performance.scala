@@ -32,6 +32,7 @@ println(df3.explain(true)) // Will explain the spark process
 df.coalesce(5).write.csv("/app/db/folder")		// will create only 5 files which may not be equal in size.
 df1 = df1.coalesce(7)
 df1.rdd.partitions.size 
+df1.rdd.getNumPartitions
 
 val df1 = df1.repartition(5)
 val locationDf = peopleDf.repartition($"location") //Creates 200 Partiontions some will be empty
