@@ -28,7 +28,8 @@ val acceptDecline = spark.table("MyTable")
       .withColumn("accpDecline", when($"action" === "accept", 1).otherwise( when($"action" === "decline", 0).otherwise(-1)))
       .filter($"accpDecline" === 0 || $"accpDecline" === 1)
 
-
+// using when otherwise
+val df1 = df.withColumn("Green_Ind", when($"color" === "Green", 1).otherwise(0))
 
 //Windowing functions
 import org.apache.spark.sql.expressions.Window
