@@ -15,6 +15,8 @@ spark-submit
 --class "com.Main"  
 --files ./hive-site.xml ./myfile.jar '2017-06-26' '2017-08-20'
 """
+
+
 println(df3.explain(true)) // Will explain the spark process
 """
 // == Optimized Logical Plan ==
