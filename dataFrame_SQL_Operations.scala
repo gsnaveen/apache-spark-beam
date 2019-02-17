@@ -44,6 +44,9 @@ dataset = dataset.withColumn('weekofyear',f.when(dataset.weekofyear > 16,dataset
 StringAdd = 'Week_'
 dataset = dataset.withColumn("weekbucket", f.concat(f.lit(StringAdd),dataset.weekofyear.cast("string")))
 
+//Repartitioning and sorting within the dataframes to make joins faster
+df.repartition($"key", 2).sortWithinPartitions()
+
 // SQL Aggregate functions
 select RowKey
 ,session_id
