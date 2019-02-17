@@ -11,3 +11,6 @@ val df1Sample = df1.sample(true, 0.10).coalesce(1)
 
 val counter = sc.longAccumulator("counter")
 counter.add(10)
+
+val columns = Seq("level1","level2")
+df1.write.partitionBy(columns:_*).mode("overwrite").save(s"$hive_warehouse/$dbname.db/$temp_table/")
