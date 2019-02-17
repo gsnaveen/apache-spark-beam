@@ -15,7 +15,7 @@ spark-submit
 --files ./hive-site.xml ./myfile.jar '2017-06-26' '2017-08-20'
 
 println(df3.explain(true)) // Will explain the spark process
-
+"""
 // == Optimized Logical Plan ==
 // Project [custId#10, data_date#11, buy#12, cast(data_date#11 as date) AS data_date_dtype#16]
 // +- Filter (isnotnull(data_date#11) && (cast(cast(data_date#11 as date) as string) > 2018-08-02))
@@ -25,7 +25,7 @@ println(df3.explain(true)) // Will explain the spark process
 // *(1) Project [custId#10, data_date#11, buy#12, cast(data_date#11 as date) AS data_date_dtype#16]
 // +- *(1) Filter (isnotnull(data_date#11) && (cast(cast(data_date#11 as date) as string) > 2018-08-02))
 //    +- *(1) FileScan csv [custId#10,data_date#11,buy#12] Batched: false, Format: CSV, Location: InMemoryFileIndex[file:/C:/myScalaA/bk1/inData.tsv], PartitionFilters: [], PushedFilters: [IsNotNull(data_date)], ReadSchema: struct<custId:string,data_date:string,buy:string>
-
+"""
 df.coalesce(5).write.csv("/app/db/folder")		// will create only 5 files which may not be equal in size.
 df1 = df1.coalesce(7)
 df1.rdd.partitions.size 
