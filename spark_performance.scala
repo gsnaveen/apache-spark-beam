@@ -1,5 +1,10 @@
 import org.apache.spark.util._
 
+var spark = SparkSession.builder.appName("blukai").master("local").getOrCreate();
+val sqlContext = spark.sqlContext
+import sqlContext.implicits._
+val myData  = spark.sparkContext.textFile("mydata.txt") //.as[String]
+
 //Displays the size of the object in bytes
 println(SizeEstimator.estimate(df3))
 
