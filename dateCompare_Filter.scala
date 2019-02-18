@@ -1,3 +1,4 @@
+//https://www.mungingdata.com/apache-spark/dates-times
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 import org.joda.time.format.DateTimeFormat
@@ -51,3 +52,43 @@ object datetest2 {
   }
 
 }
+"""
+import java.sql.Date
+import org.apache.spark.sql.types.{DateType, IntegerType}
+
+val sourceDF = spark.createDF(
+  List(
+    (1, Date.valueOf("2016-09-30")),
+    (2, Date.valueOf("2017-12-14"))
+  ), List(
+    ("cust_id", IntegerType, true),
+    ("join_date", DateType, true)
+  )
+)
+
+val sourceDF = spark.createDF(
+  List(
+    (1, "2013-01-30"),
+    (2, "2014-01-01")
+  ), List(
+    ("cust_id", IntegerType, true),
+    ("join_date", StringType, true)
+  )
+).withColumn(
+  "join_date",
+  col("join_date").cast("date")
+)
+year(), month(), dayofmonth()
+minute(), second()
+datediff(),date_add()
+
+val sourceDF = spark.createDF(
+  List(
+    (1, Timestamp.valueOf("2017-12-02 03:04:00")),
+    (2, Timestamp.valueOf("2018-01-01 01:45:20"))
+  ), List(
+    ("cust_id", IntegerType, true),
+    ("join_time", TimestampType, true)
+  )
+)
+"""
