@@ -54,7 +54,8 @@ object datetest2 {
 }
 """
 import java.sql.Date
-import org.apache.spark.sql.types.{DateType, IntegerType}
+import java.sql.Timestamp
+import org.apache.spark.sql.types.{DateType, TimestampType, IntegerType}
 
 val sourceDF = spark.createDF(
   List(
