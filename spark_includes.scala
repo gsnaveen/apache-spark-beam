@@ -3,6 +3,7 @@ import org.apache.spark.sql.{Row,SaveMode, SparkSession}
 import org.apache.spark.sql.functions._ //{col, lit, to_timestamp, udf,concat,round}
 import org.apache.spark.sql.expressions._ //Window
 import org.apache.spark.sql.types.{StringType,DoubleType,DateType,StructType}
+import org.apache.spark.util._ //SizeEstimator.estimate(df3)  println(df4.rdd.partitions.size) println(df4.rdd.getNumPartitions)
 
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming._
@@ -10,7 +11,7 @@ import org.apache.spark.storage.StorageLevel
 
 //DateTime
 import org.joda.time.format.DateTimeFormat
-import org.joda.time.{DateTime, Duration,Period}
+import org.joda.time.{DateTime, Duration,Period,Interval,Days,Months, Years}
 
 //Java
 import java.util.regex.Pattern
