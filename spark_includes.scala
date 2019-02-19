@@ -16,17 +16,23 @@ import org.joda.time.{DateTime, Duration,Period}
 import java.util.regex.Pattern
 import java.util.regex.Matcher
 
-import java.util.Properties
-  val connectionProperties = new Properties()
-  connectionProperties.put("user", s"${jdbcUsername}")
-  connectionProperties.put("password", s"${jdbcPassword}")
+//Postgres
+val jdbcUrl = s"jdbc:postgresql://${jdbcHostname}:${jdbcPort}/${jdbcDatabase}"
 
+// Create a Properties() object to hold the parameters.
+val connectionProperties = new Properties()
+connectionProperties.put("user", s"${jdbcUsername}")
+connectionProperties.put("password", s"${jdbcPassword}")
+val schema1table = spark.read.jdbc(jdbcUrl, "schema1.testdata", connectionProperties)
+
+//Elastic
  df.write
       .format("org.elasticsearch.spark.sql")
 
 val reader = spark.read
       .format("org.elasticsearch.spark.sql")
 
+//Cassandra
 val df = spark.read
       .format("org.apache.spark.sql.cassandra")
       .options(Map( "table" -> "words_new", "keyspace" -> "test_keyspace"))
