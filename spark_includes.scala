@@ -2,7 +2,7 @@
 import org.apache.spark.sql.{Row,SaveMode, SparkSession}
 import org.apache.spark.sql.functions._ //{col, lit, to_timestamp, udf,concat,round}
 import org.apache.spark.sql.expressions._ //Window
-import org.apache.spark.sql.types.{StringType,DoubleType,DateType}
+import org.apache.spark.sql.types.{StringType,DoubleType,DateType,StructType}
 
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming._
