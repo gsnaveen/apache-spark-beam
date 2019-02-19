@@ -39,4 +39,27 @@ val df = spark.read
       .format("org.apache.spark.sql.cassandra")
       .options(Map( "table" -> "words_new", "keyspace" -> "test_keyspace"))
 
+libraryDependencies += "junit" % "junit" % "4.12" % Test
+libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % Test
+libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.1"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.1"  % "test"
+libraryDependencies += "joda-time" % "joda-time" % "2.10"
 
+libraryDependencies ++= {
+val sparkVer = "2.3.0"
+  Seq(
+        "org.apache.spark" %% "spark-core" % sparkVer ,
+        "org.apache.spark" %% "spark-sql" % sparkVer ,
+    "org.apache.logging.log4j" % "log4j-api" % "2.11.1",
+    "org.apache.logging.log4j" % "log4j-core" % "2.11.1",
+    "org.apache.logging.log4j" %% "log4j-api-scala" % "11.0"
+  )
+}
+
+// https://mvnrepository.com/artifact/org.postgresql/postgresql
+libraryDependencies += "org.postgresql" % "postgresql" % "42.1.1"
+libraryDependencies += "com.datastax.spark" %% "spark-cassandra-connector" % "2.0.10"
+// https://mvnrepository.com/artifact/org.apache.kafka/kafka
+libraryDependencies += "org.apache.kafka" %% "kafka" % "2.1.0"
+// https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka-0-10
+libraryDependencies += "org.apache.spark" %% "spark-streaming-kafka-0-10" % "2.3.0"
