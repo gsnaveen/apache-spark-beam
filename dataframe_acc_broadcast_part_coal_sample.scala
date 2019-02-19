@@ -5,6 +5,12 @@ counter.add(10)
 val df22 = spark.read.option("sep", "\t").option("header","true").csv("inData2.txt")
 val df2 = broadcast(df22)
 
+
+df.cache()
+df.persist()
+df.unpersist(blocking = true)
+sqlContext.uncacheTable("sparktable")
+
 //Writing to given number of files
 
 df.coalesce(5).write.csv("/app/db/folder")		# will create only 5 files which may not be equal in size.
