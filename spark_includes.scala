@@ -24,6 +24,7 @@ val connectionProperties = new Properties()
 connectionProperties.put("user", s"${jdbcUsername}")
 connectionProperties.put("password", s"${jdbcPassword}")
 val schema1table = spark.read.jdbc(jdbcUrl, "schema1.testdata", connectionProperties)
+schema1table.repartition(1).write.mode(SaveMode.Append).jdbc(jdbcUrl, "schema1.diamonds", connectionProperties)
 
 //Elastic
  df.write
