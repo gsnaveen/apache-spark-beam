@@ -39,6 +39,16 @@ val df = spark.read
       .format("org.apache.spark.sql.cassandra")
       .options(Map( "table" -> "words_new", "keyspace" -> "test_keyspace"))
 
+
+
+spark.conf.set("spark.sql.shuffle.partitions", 1000)
+spark.conf.set("hive.exec.dynamic.partition", "true")
+spark.conf.set("hive.exec.dynamic.partition.mode", "nonstrict")
+spark.conf.set("spark.sql.sources.partitionOverwriteMode","dynamic")
+// spark.conf.get("spark.sql.autoBroadcastJoinThreshold")
+spark.conf.set("spark.sql.autoBroadcastJoinThreshold",20971520)
+
+
 libraryDependencies += "junit" % "junit" % "4.12" % Test
 libraryDependencies += "com.novocode" % "junit-interface" % "0.11" % Test
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.0.1"
