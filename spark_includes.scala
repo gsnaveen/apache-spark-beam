@@ -10,7 +10,7 @@ import org.apache.spark.streaming._
 import org.apache.spark.storage.StorageLevel
 
 //DateTime
-import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormat //forPattern("yyyy-MM-dd") parseDateTime(vriable)
 import org.joda.time.{DateTime, Duration,Period,Interval,Days,Months, Years}
 
 //Java
