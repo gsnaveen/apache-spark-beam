@@ -47,6 +47,7 @@ spark.conf.set("hive.exec.dynamic.partition.mode", "nonstrict")
 spark.conf.set("spark.sql.sources.partitionOverwriteMode","dynamic")
 // spark.conf.get("spark.sql.autoBroadcastJoinThreshold")
 spark.conf.set("spark.sql.autoBroadcastJoinThreshold",20971520)
+spark.conf.set("spark.debug.maxToStringFields", maxLength)
 
 
 libraryDependencies += "junit" % "junit" % "4.12" % Test
