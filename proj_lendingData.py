@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col,unix_timestamp, to_date, \
-            split,trim,avg,round,when,count,sum,max,datediff,udf
+            split,trim,avg,round,when,count,sum,max,datediff,udf,lit
 from pyspark.sql.window import Window
 from pyspark.sql.types import *
 
@@ -46,6 +46,18 @@ def cleanPercent(inValue):
 
 cleanPercentWithCol = udf(cleanPercent, FloatType())
 
+def turnStringToMap(inValue):
+    myDict = {}
+    inList = inValue.split('&')
+    for keyValue in inList:
+        keyValueSplit = keyValue.split('=')
+        myDict[keyValueSplit[0]] = keyValueSplit[1]
+
+    return myDict
+
+turnStringToMapWithCol = udf(turnStringToMap, MapType(StringType(), StringType()))
+
+strToSplit = "a=aa&b=bb&c=cc"
 
 agent = agent.withColumn('start_date_dt',
                    to_date(unix_timestamp(col('START_DATE'), 'MM/dd/yyyy').cast("timestamp")))
@@ -71,6 +83,8 @@ agentandLoans = agentandLoans.withColumn("udfallDates", \
 agentandLoans = agentandLoans.withColumn("udfint_rate", \
                                             cleanPercentWithCol('int_rate'))
 
+agentandLoans = agentandLoans.withColumn("mapattr", \
+                                         turnStringToMapWithCol(lit(strToSplit)))
 #Average loan term
 agentandLoans.groupby('NAME').agg(round(avg('term_int'),2).alias('AvgTerm')).show()
 
@@ -96,7 +110,13 @@ print(varMax[0][0])
 # loansData.show()
 # loansData.printSchema()
 # agentandLoans.show()
+
 repName = 'avgLoanTerm'
 agentandLoans.write.saveAsTable(repName + "_rep", mode='overwrite', format='orc' , compression='snappy')
 agentandLoans.printSchema()
 agentandLoans.show()
+# Selecting MAP and STRUCT format attributes in different ways
+agentandLoans.select(agentandLoans.mapattr["a"].alias("myCol")
+                     ,agentandLoans.mapattr.a.alias("myColDirect")
+                     ,agentandLoans.mapattr.z.alias("myColDirectz")
+                     ,agentandLoans.udfallDates.start_date_dt.alias("StartDate")).show()
