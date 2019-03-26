@@ -28,3 +28,5 @@ while cdt <= edt:
     data1.write.saveAsTable("mydb1.incrementalData", mode='append', format='orc', compression='snappy')
 
     cdt = cdt + timedelta(days=1)
+
+#spark-submit --master yarn --deploy-mode cluster --driver-memory 9g --num-executors 10 --executor-memory 12g --conf spark.sql.shuffle.partitions=500 --executor-cores 5 --files /opt/hive-site.xml /mydatax1.py
