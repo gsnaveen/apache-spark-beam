@@ -24,10 +24,10 @@ while cdt <= edt:
                                 on uc.cookie = web.unique_visitor
                                 where web.viewdate ='""" + str(cdt) + """' limit 100""")
     if loadtype.lower() == 'create':
-      data1.write.saveAsTable("mydb1.incrementalData", mode='overwrite', format='orc', compression='snappy')
-      loadtype = 'created'
+        data1.write.saveAsTable("mydb1.incrementalData", mode='overwrite', format='orc', compression='snappy')
+        loadtype = 'created'
     else:
-      data1.write.saveAsTable("mydb1.incrementalData", mode='append', format='orc', compression='snappy')
+        data1.write.saveAsTable("mydb1.incrementalData", mode='append', format='orc', compression='snappy')
 
     cdt = cdt + timedelta(days=1)
 
