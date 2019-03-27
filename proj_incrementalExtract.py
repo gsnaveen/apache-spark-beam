@@ -21,7 +21,7 @@ mappedData.createOrReplaceTempView("mappedData")
 
 while cdt <= edt:
     data1 = spark.sql("""Select web.* , uc.userid as cco_id from mydb1.web_data web inner join mappedData uc 
-                                on uc.cookie = web.unique_visitor
+                                on uc.cookie = web.uv
                                 where web.viewdate ='""" + str(cdt) + """' limit 100""")
     if loadtype.lower() == 'create':
         data1.write.saveAsTable("mydb1.incrementalData", mode='overwrite', format='orc', compression='snappy')
