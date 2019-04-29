@@ -33,6 +33,9 @@ val df1 = df.withColumn("Green_Ind", when($"color" === "Green", 1).otherwise(0))
 
 //Windowing functions
 import org.apache.spark.sql.expressions.Window
+
+//Window.unboundedPreceding, Window.currentRow, Window.unboundedFollowing
+
 df1.withColumn("rank", rank().over(Window.partitionBy(col("viewdate")).orderBy(col("ip").asc))).show()
 
 RunningSUM = df1.withColumn("runnignsum", sum(col("orders")).over(Window.partitionBy(col("ip")).orderBy("ip").rowsBetween(Long.MinValue, 0))).show()
