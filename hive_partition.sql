@@ -1,6 +1,9 @@
 #https://stackoverflow.com/questions/21477855/dynamic-partitioning-create-as-on-hive
 #https://stackoverflow.com/questions/20756561/how-to-pick-up-all-data-into-hive-from-subdirectories
 #https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL
+#https://cwiki.apache.org/confluence/display/Hive/Hive+Transactions
+#https://community.hortonworks.com/articles/49971/hive-streaming-compaction.html
+#https://cwiki.apache.org/confluence/display/Hive/ListBucketing
 
 describe tablename;
 describe extended tablename;
@@ -48,7 +51,8 @@ CREATE TEMPORARY TABLE list_bucket_multiple (col1 STRING, col2 int, col3 STRING)
 CREATE TEMPORARY TABLE db1.z_part1_temp as Select * from db1.z_part1;
 
 CREATE TRANSACTIONAL TABLE transactional_table_test(key string, value string) PARTITIONED BY(ds string) STORED AS ORC;
-                                                                          
+
+#Partition Table                                                                          
 insert overwrite table tmp.table1 partition(ptdate,ptchannel)  
 select col_a,count(1) col_b,ptdate,ptchannel
 from tmp.table2
