@@ -1,5 +1,6 @@
 #https://stackoverflow.com/questions/21477855/dynamic-partitioning-create-as-on-hive
 #https://stackoverflow.com/questions/20756561/how-to-pick-up-all-data-into-hive-from-subdirectories
+#https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL
 
 describe tablename;
 describe extended tablename;
