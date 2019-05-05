@@ -24,8 +24,18 @@ ALTER TABLE table_name CLUSTERED BY (col_name, col_name, ...) [SORTED BY (col_na
 
 ALTER TABLE mktg_bana.z_part1_like CLUSTERED BY (cookie) SORTED BY (cookie) into 1000 buckets;  
                                                                           
+# SKEWING of DATA                                                                       
 ALTER TABLE table_name NOT SKEWED;                                                                          
 
+#Primary & foregin Keys
+ALTER TABLE table_name ADD CONSTRAINT constraint_name PRIMARY KEY (column, ...) DISABLE NOVALIDATE;
+ALTER TABLE table_name ADD CONSTRAINT constraint_name FOREIGN KEY (column, ...) REFERENCES table_name(column, ...) DISABLE NOVALIDATE RELY;
+ALTER TABLE table_name DROP CONSTRAINT constraint_name;                                                                          
+ 
+#Add Partition                                                                          
+ ALTER TABLE page_view ADD PARTITION (dt='2008-08-08', country='us') location '/path/to/us/part080808'
+                          PARTITION (dt='2008-08-09', country='us') location '/path/to/us/part080809';                                                                         
+                                                                          
 insert overwrite table tmp.table1 partition(ptdate,ptchannel)  
 select col_a,count(1) col_b,ptdate,ptchannel
 from tmp.table2
