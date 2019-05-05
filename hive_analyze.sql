@@ -1,5 +1,8 @@
 #https://cwiki.apache.org/confluence/display/Hive/StatsDev
 
+explain select * from db1.z_part1;
+
+
 ANALYZE TABLE db1.z_pdata1 COMPUTE STATISTICS; 
 
 ANALYZE TABLE Table1 PARTITION(ds='2008-04-09', hr=11) COMPUTE STATISTICS;
