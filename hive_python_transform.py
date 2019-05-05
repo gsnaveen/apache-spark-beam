@@ -1,3 +1,6 @@
+ #https://community.hortonworks.com/articles/72414/how-to-create-a-custom-udf-for-hive-using-python.html
+ #https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Transform
+  
   #!/users/userid/.anaconda2/bin/python
   import sys
   import base64
