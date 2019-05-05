@@ -21,23 +21,42 @@ ANALYZE TABLE db1.z_part1 PARTITION(viewdate) COMPUTE STATISTICS FOR COLUMNS;
 
 describe extended db1.z_pdata1;
 
-DESCRIBE EXTENDED db1.z_part1 PARTITION(viewdate='2018-08-01');
-Detailed Partition Information  Partition(values:[2018-08-01], dbName:db1, tableName:z_part1
-, createTime:1536847732
-, lastAccessTime:0
-, sd:StorageDescriptor(cols:[FieldSchema(name:cookie, type:string, comment:null)
-, FieldSchema(name:url, type:string, comment:null)
-, FieldSchema(name:viewdate, type:string, comment:null)]
-, location:maprfs:/app/user/warehouse/db1/z_part1/viewdate=2018-08-01
-, inputFormat:org.apache.hadoop.hive.ql.io.orc.OrcInputFormat
-, outputFormat:org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat
-, compressed:false, numBuckets:-1
-, serdeInfo:SerDeInfo(name:null, serializationLib:org.apache.hadoop.hive.ql.io.orc.OrcSerde, parameters:{serialization.format=1})
-, bucketCols:[]
-, sortCols:[]
-, parameters:{}
-, skewedInfo:SkewedInfo(skewedColNames:[], skewedColValues:[], skewedColValueLocationMaps:{})
-, storedAsSubDirectories:false)
-, parameters:{totalSize=1366, numRows=100, rawDataSize=23700
-              , COLUMN_STATS_ACCURATE={"BASIC_STATS":"true","COLUMN_STATS":{"cookie":"true","url":"true"}}
-              , numFiles=1, transient_lastDdlTime=1557095539})
+DESCRIBE formatted db1.z_part1 PARTITION(viewdate='2018-08-01');
+OK
+# col_name              data_type               comment
+
+cookie                  string
+url                     string
+
+# Partition Information
+# col_name              data_type               comment
+
+viewdate                string
+
+# Detailed Partition Information
+Partition Value:        [2018-08-01]
+Database:               db1
+Table:                  z_part1
+CreateTime:             Thu Sep 13 07:08:52 PDT 2018
+LastAccessTime:         UNKNOWN
+Location:               maprfs:/app/user/warehouse/db1/z_part1/viewdate=2018-08-01
+Partition Parameters:
+        COLUMN_STATS_ACCURATE   {"BASIC_STATS":"true","COLUMN_STATS":{"cookie":"true","url":"true"}}
+        numFiles                1
+        numRows                 100
+        rawDataSize             23700
+        totalSize               1366
+        transient_lastDdlTime   1557095539
+
+# Storage Information
+SerDe Library:          org.apache.hadoop.hive.ql.io.orc.OrcSerde
+InputFormat:            org.apache.hadoop.hive.ql.io.orc.OrcInputFormat
+OutputFormat:           org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat
+Compressed:             No
+Num Buckets:            -1
+Bucket Columns:         []
+Sort Columns:           []
+Storage Desc Params:
+        serialization.format    1
+Time taken: 0.182 seconds, Fetched: 35 row(s)
+                      
