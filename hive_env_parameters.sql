@@ -24,15 +24,21 @@ set hive.merge.mapredfiles=true;
 set hive.merge.size.per.task=512000000;
 set hive.merge.smallfiles.avgsize=512000000;
 --set hive.smalltable.filesize=512000000;
-
+set hive.exec.dynamic.partition=true;  
+set hive.exec.dynamic.partition.mode=nonstrict;  
 
 snappy is not splitable
-#https://www.tutorialscampus.com/tutorials/map-reduce/algorithm.htm
-#http://comphadoop.weebly.com/
 
+--hive commands
+show partitions tablesName
 
 --Spark
 spark.conf.set("spark.streaming.blockInterval","20")
+spark.conf.set("hive.exec.dynamic.partition", "true") 
+spark.conf.set("hive.exec.dynamic.partition.mode", "nonstrict")
+
+#https://www.tutorialscampus.com/tutorials/map-reduce/algorithm.htm
+#http://comphadoop.weebly.com/
 
 import java.io.IOException;
 import java.util.StringTokenizer;
