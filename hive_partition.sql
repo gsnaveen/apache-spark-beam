@@ -1,3 +1,5 @@
+#https://stackoverflow.com/questions/21477855/dynamic-partitioning-create-as-on-hive
+
 insert overwrite table tmp.table1 partition(ptdate,ptchannel)  
 select col_a,count(1) col_b,ptdate,ptchannel
 from tmp.table2
