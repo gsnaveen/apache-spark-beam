@@ -62,4 +62,32 @@ Sort Columns:           []
 Storage Desc Params:
         serialization.format    1
 Time taken: 0.182 seconds, Fetched: 35 row(s)
-                      
+
+# Explain plan for the table with partition
+hive> explain select cookie,url,count(*) from db1.z_part1 where viewdate = '2018-08-11' group by cookie,url;
+OK
+Plan optimized by CBO.
+
+Vertex dependency in root stage
+Reducer 2 <- Map 1 (SIMPLE_EDGE)
+
+Stage-0
+  Fetch Operator
+    limit:-1
+    Stage-1
+      Reducer 2 vectorized
+      File Output Operator [FS_12]
+        Group By Operator [GBY_11] (rows=5 width=258)
+          Output:["_col0","_col1","_col2"],aggregations:["count(VALUE._col0)"],keys:KEY._col0, KEY._col1
+        <-Map 1 [SIMPLE_EDGE] vectorized
+          SHUFFLE [RS_4]
+            PartitionCols:_col0, _col1
+            Group By Operator [GBY_10] (rows=10 width=258)
+              Output:["_col0","_col1","_col2"],aggregations:["count()"],keys:cookie, url
+              Select Operator [SEL_9] (rows=10 width=258)
+                Output:["cookie","url","cookie","url"]
+                TableScan [TS_0] (rows=10 width=258)
+                  mktg_bana@z_part1,z_part1,Tbl:COMPLETE,Col:NONE,Output:["cookie","url"]
+
+Time taken: 0.106 seconds, Fetched: 23 row(s)
+
