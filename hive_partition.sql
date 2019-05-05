@@ -31,11 +31,23 @@ ALTER TABLE table_name NOT SKEWED;
 #Primary & foregin Keys
 ALTER TABLE table_name ADD CONSTRAINT constraint_name PRIMARY KEY (column, ...) DISABLE NOVALIDATE;
 ALTER TABLE table_name ADD CONSTRAINT constraint_name FOREIGN KEY (column, ...) REFERENCES table_name(column, ...) DISABLE NOVALIDATE RELY;
-ALTER TABLE table_name DROP CONSTRAINT constraint_name;                                                                          
+ALTER TABLE table_name DROP CONSTRAINT constraint_name; 
+                                                                          
+create table pk(id1 integer, id2 integer,
+  primary key(id1, id2) disable novalidate);
  
+create table fk(id1 integer, id2 integer,
+  constraint c1 foreign key(id1, id2) references pk(id2, id1) disable novalidate);
+                                                                          
 #Add Partition                                                                          
  ALTER TABLE page_view ADD PARTITION (dt='2008-08-08', country='us') location '/path/to/us/part080808'
                           PARTITION (dt='2008-08-09', country='us') location '/path/to/us/part080809';                                                                         
+
+#Temperory table                                                                          
+CREATE TEMPORARY TABLE list_bucket_multiple (col1 STRING, col2 int, col3 STRING);
+CREATE TEMPORARY TABLE db1.z_part1_temp as Select * from db1.z_part1;
+
+CREATE TRANSACTIONAL TABLE transactional_table_test(key string, value string) PARTITIONED BY(ds string) STORED AS ORC;
                                                                           
 insert overwrite table tmp.table1 partition(ptdate,ptchannel)  
 select col_a,count(1) col_b,ptdate,ptchannel
