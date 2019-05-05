@@ -23,7 +23,7 @@ set hive.merge.mapfiles=true;
 set hive.merge.mapredfiles=true;
 set hive.merge.size.per.task=512000000;
 set hive.merge.smallfiles.avgsize=512000000;
---set hive.smalltable.filesize=512000000;
+--set hive.mapjoin.smalltable.filesize=512000000;
 set hive.exec.dynamic.partition=true;  
 set hive.exec.dynamic.partition.mode=nonstrict;  
 
