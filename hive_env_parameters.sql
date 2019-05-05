@@ -1,3 +1,6 @@
+#https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/DeprecatedProperties.html
+#https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties
+
 SET mapreduce.reduce.memory.mb=8192;
 SET mapreduce.reduce.java.opts=-Xmx6144m;
 SET mapreduce.map.memory.mb=1024;
