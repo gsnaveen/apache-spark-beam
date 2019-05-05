@@ -1,9 +1,30 @@
 #https://stackoverflow.com/questions/21477855/dynamic-partitioning-create-as-on-hive
+#https://stackoverflow.com/questions/20756561/how-to-pick-up-all-data-into-hive-from-subdirectories
 
 describe tablename;
 describe extended tablename;
-create table db1.z_part1_like like db1.z_part1;
 
+create table db1.z_part1_like like db1.z_part1; -- Will have the partitions columns as well.
+
+show partitions db1.z_part1;
+      viewdate=2018-08-01
+      viewdate=2018-08-02
+
+
+ALTER TABLE db1.z_part1 SET TBLPROPERTIES ("hive.input.dir.recursive" = "TRUE",
+    "hive.mapred.supports.subdirectories" = "TRUE",
+    "hive.supports.subdirectories" = "TRUE",
+    "mapred.input.dir.recursive" = "TRUE");
+    
+ALTER TABLE db1.z_part1 SET TBLPROPERTIES ("comment" = "mycomment");
+
+# Cluster and Partitioning
+ALTER TABLE table_name CLUSTERED BY (col_name, col_name, ...) [SORTED BY (col_name, ...)]
+  INTO num_buckets BUCKETS;
+
+ALTER TABLE mktg_bana.z_part1_like CLUSTERED BY (cookie) SORTED BY (cookie) into 1000 buckets;  
+                                                                          
+ALTER TABLE table_name NOT SKEWED;                                                                          
 
 insert overwrite table tmp.table1 partition(ptdate,ptchannel)  
 select col_a,count(1) col_b,ptdate,ptchannel
