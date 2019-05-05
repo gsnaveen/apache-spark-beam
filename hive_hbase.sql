@@ -13,3 +13,14 @@ STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
 WITH SERDEPROPERTIES (
 "hbase.columns.mapping" = "cf:col_prefix.*,:key"
 );
+
+#https://cwiki.apache.org/confluence/display/Hive/HBaseBulkLoad
+
+CREATE TABLE new_hbase_table(rowkey string, x int, y int)
+STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+WITH SERDEPROPERTIES ("hbase.columns.mapping" = ":key,cf:x,cf:y");
+ 
+SET hive.hbase.bulk=true;
+ 
+INSERT OVERWRITE TABLE new_hbase_table
+SELECT rowkey_expression, x, y FROM ...any_hive_query...;
