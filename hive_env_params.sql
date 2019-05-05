@@ -30,6 +30,8 @@ set hive.mapred.supports.subdirectories=true;
 set mapred.input.dir.recursive=true;
 set hive.exec.temporary.table.storage=memory;
 set hive.llap.execution.mode=all;
+set hive.vectorized.execution.enabled = true;
+
 snappy is not splitable
 
 --hive commands
