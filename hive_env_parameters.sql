@@ -28,3 +28,4 @@ set hive.merge.smallfiles.avgsize=512000000;
 
 snappy is not splitable
 #https://www.tutorialscampus.com/tutorials/map-reduce/algorithm.htm
+#http://comphadoop.weebly.com/
