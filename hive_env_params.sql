@@ -29,7 +29,7 @@ set hive.exec.dynamic.partition.mode=nonstrict;
 set hive.mapred.supports.subdirectories=true;
 set mapred.input.dir.recursive=true;
 set hive.exec.temporary.table.storage=memory;
-
+set hive.llap.execution.mode=all;
 snappy is not splitable
 
 --hive commands
