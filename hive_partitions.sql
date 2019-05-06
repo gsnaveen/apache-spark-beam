@@ -9,7 +9,7 @@
 ALTER TABLE table_name CLUSTERED BY (col_name, col_name, ...) [SORTED BY (col_name, ...)]
   INTO num_buckets BUCKETS;
 
-ALTER TABLE mktg_bana.z_part1_like CLUSTERED BY (cookie) SORTED BY (cookie) into 1000 buckets;  
+ALTER TABLE db1.z_part1_like CLUSTERED BY (cookie) SORTED BY (cookie) into 1000 buckets;  
 
                                                                           
 #Add Partition                                                                          
