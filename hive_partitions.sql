@@ -113,6 +113,8 @@ spark.sql("""insert overwrite table  db1.z_part1 partition(viewdate='""" + dated
 var mdfwdus = wdus.select("url").dropDuplicates()
 mdfwdus.createOrReplaceTempView("mdfwdus")
                                                                           
-#https://stackoverflow.com/questions/31341498/save-spark-dataframe-as-dynamic-partitioned-table-in-hive                                                                          
+#https://stackoverflow.com/questions/31341498/save-spark-dataframe-as-dynamic-partitioned-table-in-hive
+#https://stackoverflow.com/questions/38487667/overwrite-specific-partitions-in-spark-dataframe-write-method
 df.write().mode(SaveMode.Append).partitionBy("colname").saveAsTable("Table")
 df.write.partitionBy('year', 'month').insertInto(...)
+df.write.mode(SaveMode.Overwrite).save("/root/path/to/data/partition_col=value")
