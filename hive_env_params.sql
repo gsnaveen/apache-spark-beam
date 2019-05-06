@@ -31,11 +31,17 @@ set mapred.input.dir.recursive=true;
 set hive.exec.temporary.table.storage=memory;
 set hive.llap.execution.mode=all;
 set hive.vectorized.execution.enabled = true;
+set hive.vectorized.execution.reduce.enabled=true;
 set hive.fetch.task.aggr=true;
 set hive.fetch.task.conversion=more;
 Set hive.fetch.task.conversion.threshold=1073741824;
 
 snappy is not splitable
+
+#https://tez.apache.org/releases/0.9.2/tez-runtime-library-javadocs/configs/TezRuntimeConfiguration.html
+set tez.grouping.max-size=67108864;
+set tez.grouping.min-size=32000000;
+set hive.tez.container.size=8192;
 
 --hive commands
 show partitions tablesName
