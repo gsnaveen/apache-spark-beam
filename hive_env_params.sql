@@ -31,6 +31,9 @@ set mapred.input.dir.recursive=true;
 set hive.exec.temporary.table.storage=memory;
 set hive.llap.execution.mode=all;
 set hive.vectorized.execution.enabled = true;
+set hive.fetch.task.aggr=true;
+set hive.fetch.task.conversion=more;
+Set hive.fetch.task.conversion.threshold=1073741824;
 
 snappy is not splitable
 
