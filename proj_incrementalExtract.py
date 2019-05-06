@@ -10,6 +10,9 @@ loadtype = 'create'
 start_date = '2018-12-01'
 end_date = '2018-12-31'
 
+last_hour_date_time = datetime.now() - timedelta(hours = 1)
+print (last_hour_date_time.strftime('%Y-%m-%d %H:%M:%S'))
+
 cdt = datetime.strptime(start_date, '%Y-%m-%d').date()
 edt = datetime.strptime(end_date, '%Y-%m-%d').date()
 spark = SparkSession.builder.appName("incremental").enableHiveSupport().getOrCreate()
