@@ -115,3 +115,4 @@ mdfwdus.createOrReplaceTempView("mdfwdus")
                                                                           
 #https://stackoverflow.com/questions/31341498/save-spark-dataframe-as-dynamic-partitioned-table-in-hive                                                                          
 df.write().mode(SaveMode.Append).partitionBy("colname").saveAsTable("Table")
+df.write.partitionBy('year', 'month').insertInto(...)
