@@ -87,7 +87,7 @@ Stage-0
               Select Operator [SEL_9] (rows=10 width=258)
                 Output:["cookie","url","cookie","url"]
                 TableScan [TS_0] (rows=10 width=258)
-                  mktg_bana@z_part1,z_part1,Tbl:COMPLETE,Col:NONE,Output:["cookie","url"]
+                  db1@z_part1,z_part1,Tbl:COMPLETE,Col:NONE,Output:["cookie","url"]
 
 Time taken: 0.106 seconds, Fetched: 23 row(s)
 
