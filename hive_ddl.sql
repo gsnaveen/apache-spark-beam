@@ -5,6 +5,8 @@
 #https://community.hortonworks.com/articles/49971/hive-streaming-compaction.html
 #https://cwiki.apache.org/confluence/display/Hive/ListBucketing
 
+CREATE TABLE IF NOT EXISTS db1.table1 (email_address varchar(100));
+
 CREATE TABLE page_view(viewTime INT, userid BIGINT,
      page_url STRING, referrer_url STRING,
      ip STRING COMMENT 'IP Address of the User')
