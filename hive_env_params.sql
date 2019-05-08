@@ -43,6 +43,7 @@ set tez.grouping.max-size=67108864;
 set tez.grouping.min-size=32000000;
 set hive.tez.container.size=8192;
 
+#https://hortonworks.com/blog/orcfile-in-hdp-2-better-compression-better-performance/
 #https://community.hortonworks.com/articles/68631/optimizing-hive-queries-for-orc-formatted-tables.html
 ANALYZE TABLE page_views_orc COMPUTE STATISTICS FOR COLUMNS;
 SET hive.optimize.ppd=true;
