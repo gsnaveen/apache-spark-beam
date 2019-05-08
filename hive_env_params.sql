@@ -43,6 +43,20 @@ set tez.grouping.max-size=67108864;
 set tez.grouping.min-size=32000000;
 set hive.tez.container.size=8192;
 
+#https://community.hortonworks.com/articles/68631/optimizing-hive-queries-for-orc-formatted-tables.html
+ANALYZE TABLE page_views_orc COMPUTE STATISTICS FOR COLUMNS;
+SET hive.optimize.ppd=true;
+SET hive.optimize.ppd.storage=true;
+SET hive.vectorized.execution.enabled=true;
+SET hive.vectorized.execution.reduce.enabled = true;
+SET hive.cbo.enable=true;
+SET hive.compute.query.using.stats=true;
+SET hive.stats.fetch.column.stats=true;
+SET hive.stats.fetch.partition.stats=true;
+SET hive.tez.auto.reducer.parallelism=true;
+SET hive.tez.max.partition.factor=20;
+SET hive.exec.reducers.bytes.per.reducer=128000000;
+
 --hive commands
 show partitions tablesName
 
