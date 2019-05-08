@@ -45,6 +45,7 @@ set hive.tez.container.size=8192;
 
 #https://hortonworks.com/blog/orcfile-in-hdp-2-better-compression-better-performance/
 #https://community.hortonworks.com/articles/68631/optimizing-hive-queries-for-orc-formatted-tables.html
+#https://www.cloudera.com/documentation/enterprise/5-3-x/topics/admin_data_compression_performance.html
 ANALYZE TABLE page_views_orc COMPUTE STATISTICS FOR COLUMNS;
 SET hive.optimize.ppd=true;
 SET hive.optimize.ppd.storage=true;
