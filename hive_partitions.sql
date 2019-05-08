@@ -101,9 +101,7 @@ spark.conf.set("hive.exec.dynamic.partition", "true")
 spark.conf.set("hive.exec.dynamic.partition.mode", "nonstrict")
 
 val dated= "2018-08-05"
-var data1 = spark.sql("""Select cookie,url,viewdate
-from db1.partners_web_data_uri_sessionized
-where viewdate = '""" + dated + """' limit 10""")
+var data1 = spark.sql("""Select cookie,url,viewdate from db1.partners_web_data_uri_sessionized where viewdate = '""" + dated + """' limit 10""")
 
 data1.createOrReplaceTempView("data1")
 spark.sql("""insert overwrite table  db1.z_part1 partition(viewdate) Select cookie,url,viewdate from data1""")
@@ -118,3 +116,30 @@ mdfwdus.createOrReplaceTempView("mdfwdus")
 df.write().mode(SaveMode.Append).partitionBy("colname").saveAsTable("Table")
 df.write.partitionBy('year', 'month').insertInto(...)
 df.write.mode(SaveMode.Overwrite).save("/root/path/to/data/partition_col=value")
+                                                                          
+###                                                                           
+spark.conf.set("hive.exec.dynamic.partition", "true") 
+spark.conf.set("hive.exec.dynamic.partition.mode", "nonstrict")
+spark.conf.set("spark.sql.sources.partitionOverwriteMode", "dynamic") --Spark 2.3 Onwards
+
+df = spark.sql("Select cookie,url,viewdate from mydb1_web.webData where viewdate = '2018-08-01' limit 50")
+df.write.mode("overwrite").partitionBy("viewdate").saveAsTable("mydb1_bana.z_part1_spk")
+
+2018-08-01      50
+
+df = spark.sql("Select cookie,url,viewdate from mydb1_web.webData where viewdate = '2018-08-02' limit 45")
+df.write.mode("overwrite").partitionBy("viewdate").saveAsTable("mydb1_bana.z_part1_spk")
+
+2018-08-02      45
+
+df = spark.sql("Select cookie,url,viewdate from mydb1_web.webData where viewdate = '2018-08-03' limit 40")
+df.write.mode("append").insertInto("mydb1_bana.z_part1_spk") #no Need to specfy partiton by
+
+2018-08-02      45
+2018-08-03      40
+
+df = spark.sql("Select cookie,url,viewdate from mydb1_web.webData where viewdate = '2018-08-03' limit 30")
+df.write.mode("overwrite").insertInto("mydb1_bana.z_part1_spk")
+
+2018-08-02      45
+2018-08-03      70
