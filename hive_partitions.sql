@@ -143,3 +143,6 @@ df.write.mode("overwrite").insertInto("mydb1_bana.z_part1_spk")
 
 2018-08-02      45
 2018-08-03      70
+                                                                          
+spark.sql("ALTER TABLE mydb1_bana.z_part1_spk DROP IF EXISTS PARTITION(viewdate = '2018-08-03')") #Works after droping the partition
+
