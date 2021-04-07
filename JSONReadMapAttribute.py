@@ -8,7 +8,7 @@ spark = SparkSession.\
 data_schema = [StructField("RUNID",StringType(),True),StructField("mapAttribute", MapType(StringType(), StringType(), True),True)]
 schemaStruct=StructType(fields=data_schema)
 
-df = spark.read.json("./data/source/json/jsondatajson",schema=schemaStruct)
+df = spark.read.json("./data/source/json/jsondata.json",schema=schemaStruct)
 df.printSchema()
 
 df.createOrReplaceTempView("dfSql")
