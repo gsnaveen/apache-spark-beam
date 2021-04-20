@@ -22,3 +22,18 @@ Select name,ph,category['key1'],category['key2']
 from hive_stg.db.my_testmap
 
 -- https://stackoverflow.com/questions/42846229/select-all-columns-of-a-hive-struct
+drop table db.my_teststruct_1;
+create table db.my_teststruct_1 (
+	code int,
+    area_name string,
+    json1 STRUCT<namelevel1:string ,placelevel1:string >
+);
+
+drop table db.my_teststruct_2;
+create table db.my_teststruct_2 (
+	code int,
+    area_name string,
+    json1 STRUCT<namelevel1:string , STRUCT<namelevel2:string>>
+);
+
+-- SQL Error [40000] [42000]: Error while compiling statement: FAILED: ParseException line 4:43 mismatched input '<' expecting : near 'STRUCT' in column specification
