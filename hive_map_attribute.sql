@@ -20,3 +20,5 @@ Presto:
 
 Select name,ph,category['key1'],category['key2'] 
 from hive_stg.db.my_testmap
+
+-- https://stackoverflow.com/questions/42846229/select-all-columns-of-a-hive-struct
