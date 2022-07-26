@@ -1,0 +1,8 @@
+# List TD Databases
+SELECT * from information_schema.schemata
+
+# List TD Tables
+SELECT * from {catalog}.information_schema.tables
+
+# List all column metadata
+SELECT * from {catalog}.information_schema.columns
