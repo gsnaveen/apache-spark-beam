@@ -1,8 +1,0 @@
-# List TD Databases
-SELECT * from information_schema.schemata
-
-# List TD Tables
-SELECT * from edw_tesseract.information_schema.tables
-
-# List all column metadata
-SELECT * from information_schema.columns
