@@ -9,6 +9,12 @@ def getDomain(value):
 		return "NoDomain"
 
 # sess =  dataframe with URL
+
+df = spark.createDataFrame([
+     ('//www.mycomp.om/x/a/'),
+     ('//www.mycomp.om/x/b/'),
+     ('//www.mycomp.om/x/c/')
+ ], ["url"])
   
 udfgetDomain = udf(getDomain, StringType())
 sess_with_domain = sess.withColumn("RequestDomain", udfgetDomain("url"))
