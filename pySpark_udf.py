@@ -10,7 +10,7 @@ def getDomain(value):
 
 # sess =  dataframe with URL
 
-df = spark.createDataFrame([
+sess = spark.createDataFrame([
      ('//www.mycomp.om/x/a/'),
      ('//www.mycomp.om/x/b/'),
      ('//www.mycomp.om/x/c/')
