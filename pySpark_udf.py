@@ -14,7 +14,7 @@ udfgetDomain = udf(getDomain, StringType())
 sess_with_domain = sess.withColumn("RequestDomain", udfgetDomain("url"))
 sess_with_domain.show()
 
-# Another example
+# Another example with complex data type
 def mystructcall (val1,val2):
     mystruct = {"refreshopp":None,"servicerenewal":None}
     mystruct["refreshopp"] = val1
