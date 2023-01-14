@@ -127,7 +127,7 @@ agentandLoans.select(agentandLoans.mapattr["a"].alias("myCol")
 # Joining spark syntax
 # Structure data type
 # Date functions
-# UDF calls
+# Complex UDF calls
 # Data cleanse
 # withColumn for column transformations
 # window functions, group by aggregations
