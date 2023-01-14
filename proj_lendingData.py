@@ -121,3 +121,16 @@ agentandLoans.select(agentandLoans.mapattr["a"].alias("myCol")
                      ,agentandLoans.mapattr.a.alias("myColDirect")
                      ,agentandLoans.mapattr.z.alias("myColDirectz")
                      ,agentandLoans.udfallDates.start_date_dt.alias("StartDate")).show()
+
+# This script covers the following
+# File reading
+# Joining spark syntax
+# Structure data type
+# Date functions
+# UDF calls
+# Data cleanse
+# withColumn for column transformations
+# window functions, group by aggregations
+# Column/Attribute aliasing 
+# saveAsTable
+# some other functions
