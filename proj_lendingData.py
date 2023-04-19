@@ -134,3 +134,4 @@ agentandLoans.select(agentandLoans.mapattr["a"].alias("myCol")
 # Column/Attribute aliasing 
 # saveAsTable
 # some other functions
+# Data https://drive.google.com/drive/folders/1oErT5OIY1CMNyHW5-C1LcosU_C7tZdiU
