@@ -1,5 +1,5 @@
 # List TD Databases
-SELECT * from information_schema.schemata
+SELECT * from {catalog}.information_schema.schemata
 
 # List TD Tables
 SELECT * from {catalog}.information_schema.tables
